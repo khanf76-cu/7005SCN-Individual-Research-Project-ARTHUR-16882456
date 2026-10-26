@@ -369,11 +369,3 @@ real PDF byte check).
   CDN-fronted target gets at least passive-scan coverage from ZAP even
   when the active scan itself can't run.
 
-## AI-assistance disclosure
-
-If you use Claude (or another AI tool) to help write or debug any part
-of this code, record that honestly in your dissertation's required AI-use
-statement: which tool, which date(s), what you asked for, and what you
-changed. Keep a copy of any written permission from your module leader
-authorizing AI use beyond the module's amber-category default, since the
-assessment brief requires it to be declared either way.
