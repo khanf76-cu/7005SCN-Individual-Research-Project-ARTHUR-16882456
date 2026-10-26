@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}ARTHUR — New Scan{% endblock %}
+{% block content %}
+
+<div class="panel" id="health-strip" style="padding: 0.9rem 1.5rem; display:flex; align-items:center; justify-content:space-between;">
+  <div class="meta-row" style="margin:0;">System health: <span id="health-badge" class="risk-badge risk-info">checking...</span></div>
+  <a href="{{ url_for('health_page') }}" class="btn" style="padding:0.4rem 0.9rem; font-size:0.75rem;">view details</a>
+</div>
+
+{% if error %}
+<div class="error-box">{{ error }}</div>
+{% endif %}
+
+<div class="panel">
+  <h2>Target Configuration</h2>
+  <form action="{{ url_for('start_scan') }}" method="post">
+    <label for="target">Target (any domain, subdomain, or IP — with or without http(s)://)</label>
+    <input type="text" id="target" name="target" placeholder="example.com, https://my-site.com, or 203.0.113.10:8080" required>
+
+    <label for="api_key">OpenAI API key (optional — falls back to .env OPENAI_API_KEY)</label>
+    <input type="password" id="api_key" name="api_key" placeholder="sk-...">
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="rag_enabled" name="rag_enabled">
+      <label for="rag_enabled" style="margin:0;">Enable RAG (retrieval-augmented correlation)</label>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="skip_nmap" name="skip_nmap">
+      <label for="skip_nmap" style="margin:0;">Skip nmap stage (if not installed / no privileges)</label>
+    </div>
+
+    <div class="checkbox-row" style="margin-top:1.3rem; padding-top:1rem; border-top:1px solid var(--border);">
+      <input type="checkbox" id="authorized" name="authorized" required>
+      <label for="authorized" style="margin:0; color: var(--severity-high);">
+        I own this target, or I have explicit authorization to test it.
+      </label>
+    </div>
+
+    <div class="btn-row">
+      <button type="submit">launch assessment</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Pipeline</h2>
+  <p class="summary-text">
+    <strong>Recon</strong> (directory brute-force + subdomain enumeration) →
+    <strong>Nmap</strong> (service/version detection + NSE vuln scripts) →
+    <strong>VA</strong> (nikto web vulnerability scan) →
+    <strong>Correlate</strong> (de-duplicates all findings, looks up live
+    CVE data for detected versions, optionally retrieves RAG context, and
+    asks GPT-5-mini to produce the final risk-ranked report).
+  </p>
+</div>
+
+<script>
+  fetch("/api/health?network=0")
+    .then(r => r.json())
+    .then(data => {
+      const badge = document.getElementById("health-badge");
+      badge.textContent = data.overall_status;
+      badge.className = "risk-badge " + (
+        data.overall_status === "fail" ? "risk-high" :
+        data.overall_status === "warn" ? "risk-medium" : "risk-low"
+      );
+    })
+    .catch(() => {
+      const badge = document.getElementById("health-badge");
+      badge.textContent = "unavailable";
+    });
+</script>
+
+{% endblock %}

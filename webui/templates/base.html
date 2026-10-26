@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ARTHUR{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>&gt; ARTHUR</h1>
+      <div class="subtitle">multi-agent authorized assessment platform</div>
+    </div>
+    <div class="btn-row" style="margin-top:0;">
+      <a href="{{ url_for('index') }}" class="btn">new scan</a>
+      <a href="{{ url_for('health_page') }}" class="btn">system health</a>
+    </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    7005SCN coursework artefact — authorized-target use only — original orchestration code
+  </footer>
+</body>
+</html>

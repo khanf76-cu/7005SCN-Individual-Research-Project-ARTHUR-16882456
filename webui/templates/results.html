@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}ARTHUR — Results{% endblock %}
+{% block content %}
+
+<div class="panel">
+  <h2>Assessment Status</h2>
+  <div class="meta-row">
+    Job: {{ job_id }} &nbsp;|&nbsp; Target: {{ job.target_origin or job.target_input }}
+  </div>
+
+  {% if job.status == "failed" %}
+    <div class="error-box">Run failed: {{ job.error }}</div>
+  {% endif %}
+
+  <div class="stage-grid" id="stage-grid">
+    {% for stage in ["recon", "nmap", "va", "correlate"] %}
+    <div class="stage-card">
+      <div class="stage-name">{{ stage }}</div>
+      <div class="stage-status status-{{ job.stages[stage] }}" id="stage-{{ stage }}">{{ job.stages[stage] }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="muted" style="margin-top:0.7rem; font-size:0.78rem;">
+    recon, nmap, and va run at the same time (independent agents, independent
+    processes); correlate starts only once all three finish, since it needs
+    their combined output to de-duplicate and rank findings.
+  </p>
+</div>
+
+<div class="panel">
+  <h2>Live Agent Results</h2>
+  <div class="live-grid" id="live-grid">
+    {% for stage in ["recon", "nmap", "va"] %}
+    {% set info = job.live[stage] if job.live and stage in job.live else None %}
+    <div class="live-card" id="live-{{ stage }}">
+      <div class="live-card-header">{{ stage }}</div>
+      <div class="live-card-body" id="live-body-{{ stage }}">
+        {% if info %}
+          <div class="live-headline">{{ info.headline }}</div>
+          {% if info.lines %}
+          <ul class="live-findings">
+            {% for line in info.lines %}<li>{{ line }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        {% else %}
+          <span class="muted">waiting for this agent to finish...</span>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% if job.status == "completed" and job.result %}
+{% set correlate = job.result.correlate %}
+<div class="panel">
+  <h2>Executive Summary</h2>
+  <p class="summary-text">{{ correlate.executive_summary }}</p>
+  <span class="risk-badge risk-{{ (correlate.overall_risk_rating or 'unknown')|lower }}">
+    Overall risk: {{ correlate.overall_risk_rating }}
+  </span>
+</div>
+
+<div class="panel">
+  <h2>Export</h2>
+  <div class="btn-row">
+    <a class="btn" href="{{ url_for('export_json', job_id=job_id) }}">download JSON</a>
+    <a class="btn" href="{{ url_for('export_html', job_id=job_id) }}">download HTML</a>
+    <a class="btn" href="{{ url_for('export_pdf', job_id=job_id) }}">download PDF</a>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Findings ({{ correlate.findings|length }})</h2>
+  <table class="findings-table">
+    <thead>
+      <tr>
+        <th>Severity</th>
+        <th>Title</th>
+        <th>Endpoint</th>
+        <th>Confidence</th>
+        <th>Source</th>
+        <th>CVEs</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in correlate.findings | sort(attribute="severity_sort_key") %}
+      <tr>
+        <td><span class="risk-badge sev-{{ (f.severity or 'info')|lower }}">{{ f.severity }}</span></td>
+        <td>
+          {{ f.title }}
+          <div class="finding-evidence">{{ f.evidence }}</div>
+        </td>
+        <td>{{ f.endpoint }}</td>
+        <td>{{ f.confidence }}</td>
+        <td>{{ (f.source_agents or [])|join(', ') }}</td>
+        <td>
+          {% for cve in (f.related_cves or []) %}
+          <span class="cve-tag">{{ cve }}</span>
+          {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if correlate.deduplication_notes %}
+  <div class="finding-evidence" style="margin-top:1rem;">
+    <strong>Deduplication notes:</strong> {{ correlate.deduplication_notes }}
+  </div>
+  {% endif %}
+</div>
+
+{% if job.result.errors %}
+<div class="panel">
+  <h2>Agent Errors</h2>
+  {% for stage, err in job.result.errors.items() %}
+  <div class="error-box">{{ stage }}: {{ err }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endif %}
+
+{% if job.status in ["starting", "running"] %}
+<script>
+  const jobId = {{ job_id|tojson }};
+  const statusEndpoint = "/status/" + jobId;
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function renderLive(live) {
+    for (const [stage, info] of Object.entries(live || {})) {
+      const body = document.getElementById("live-body-" + stage);
+      if (!body) continue;
+      let html = "<div class='live-headline'>" + escapeHtml(info.headline) + "</div>";
+      if (info.lines && info.lines.length) {
+        html += "<ul class='live-findings'>" +
+          info.lines.map((l) => "<li>" + escapeHtml(l) + "</li>").join("") +
+          "</ul>";
+      }
+      body.innerHTML = html;
+    }
+  }
+
+  async function poll() {
+    try {
+      const res = await fetch(statusEndpoint);
+      const data = await res.json();
+      for (const [stage, st] of Object.entries(data.stages)) {
+        const el = document.getElementById("stage-" + stage);
+        if (el) {
+          el.textContent = st;
+          el.className = "stage-status status-" + st;
+        }
+      }
+      renderLive(data.live);
+      if (data.status === "completed" || data.status === "failed") {
+        window.location.reload();
+        return;
+      }
+    } catch (e) {
+      // network hiccup -- just try again on the next tick
+    }
+    setTimeout(poll, 2000);
+  }
+  poll();
+</script>
+{% endif %}
+
+{% endblock %}

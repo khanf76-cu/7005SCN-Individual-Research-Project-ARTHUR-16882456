@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}ARTHUR — System Health{% endblock %}
+{% block content %}
+
+<div class="panel">
+  <h2>System Health</h2>
+  <div class="meta-row">
+    Overall status:
+    <span class="risk-badge risk-{{ 'high' if report.overall_status == 'fail' else ('medium' if report.overall_status == 'warn' else 'low') }}">
+      {{ report.overall_status }}
+    </span>
+  </div>
+
+  {% if report.overall_status == "fail" %}
+  <div class="error-box">
+    One or more required checks failed. Fix these before launching a
+    scan — see INSTALL.md, or run <code>sudo ./setup.sh</code> again.
+  </div>
+  {% endif %}
+
+  <table class="findings-table">
+    <thead>
+      <tr>
+        <th>Check</th>
+        <th>Status</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in report.checks %}
+      <tr>
+        <td>{{ c.name }}</td>
+        <td>
+          <span class="risk-badge {{ 'risk-high' if c.status == 'fail' else ('risk-medium' if c.status == 'warn' else 'risk-low') }}">
+            {{ c.status }}
+          </span>
+        </td>
+        <td class="finding-evidence">{{ c.detail }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="btn-row">
+    <a class="btn" href="{{ url_for('health_page') }}">re-check</a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ARTHUR Report — {{ job.target_origin }}</title>
+  <style>
+    {% include "standalone_style.css" %}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>&gt; ARTHUR</h1>
+      <div class="subtitle">multi-agent authorized assessment report (exported, static)</div>
+    </div>
+  </header>
+  <main>
+    <div class="panel">
+      <h2>Assessment Overview</h2>
+      <div class="meta-row">
+        Job: {{ job_id }} &nbsp;|&nbsp; Target: {{ job.target_origin }}
+        &nbsp;|&nbsp; Duration: {{ "%.1f"|format(job.result.duration_s or 0) }}s
+      </div>
+    </div>
+
+    {% set correlate = job.result.correlate %}
+    <div class="panel">
+      <h2>Executive Summary</h2>
+      <p class="summary-text">{{ correlate.executive_summary }}</p>
+      <span class="risk-badge risk-{{ (correlate.overall_risk_rating or 'unknown')|lower }}">
+        Overall risk: {{ correlate.overall_risk_rating }}
+      </span>
+    </div>
+
+    <div class="panel">
+      <h2>Findings ({{ correlate.findings|length }})</h2>
+      <table class="findings-table">
+        <thead>
+          <tr>
+            <th>Severity</th>
+            <th>Title</th>
+            <th>Endpoint</th>
+            <th>Confidence</th>
+            <th>Source</th>
+            <th>CVEs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for f in correlate.findings | sort(attribute="severity_sort_key") %}
+          <tr>
+            <td><span class="risk-badge sev-{{ (f.severity or 'info')|lower }}">{{ f.severity }}</span></td>
+            <td>
+              {{ f.title }}
+              <div class="finding-evidence">{{ f.evidence }}</div>
+            </td>
+            <td>{{ f.endpoint }}</td>
+            <td>{{ f.confidence }}</td>
+            <td>{{ (f.source_agents or [])|join(', ') }}</td>
+            <td>
+              {% for cve in (f.related_cves or []) %}
+              <span class="cve-tag">{{ cve }}</span>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% if correlate.deduplication_notes %}
+      <div class="finding-evidence" style="margin-top:1rem;">
+        <strong>Deduplication notes:</strong> {{ correlate.deduplication_notes }}
+      </div>
+      {% endif %}
+    </div>
+  </main>
+  <footer>7005SCN coursework artefact — authorized-target use only</footer>
+</body>
+</html>

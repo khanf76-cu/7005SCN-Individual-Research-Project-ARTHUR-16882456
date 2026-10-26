@@ -1,0 +1,7 @@
+case_id,category,endpoint,expected_outcome
+GT-POS-STACKTRACE-001,information_disclosure,/rest/products,positive
+GT-POS-FTP-LISTING-001,information_disclosure,/ftp/,positive
+GT-POS-WEAK-CREDENTIAL-001,weak_credentials,/rest/user/login,positive
+GT-POS-XSS-001,reflected_xss,/redirect,positive
+GT-NEG-AUTH-001,access_control,/rest/basket/1,negative
+GT-NEG-INPUT-001,reflected_xss,/search,negative
