@@ -1,0 +1,120 @@
+{
+  "run_id": "run-20261026T212703Z",
+  "target_origin": "http://10.15.20.21:3001",
+  "recon": {
+    "findings": [
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: strict-transport-security",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "http://10.15.20.21:3001/",
+        "evidence": "Response did not set strict-transport-security (enforces HTTPS on future visits (HSTS)).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: x-content-type-options",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "http://10.15.20.21:3001/",
+        "evidence": "Response did not set x-content-type-options (stops the browser guessing/sniffing a response's MIME type).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: x-frame-options",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "http://10.15.20.21:3001/",
+        "evidence": "Response did not set x-frame-options (mitigates clickjacking by controlling framing).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: content-security-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "http://10.15.20.21:3001/",
+        "evidence": "Response did not set content-security-policy (restricts which sources scripts/styles/etc. may load from).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: referrer-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "http://10.15.20.21:3001/",
+        "evidence": "Response did not set referrer-policy (controls how much of the URL is leaked to other sites via the Referer header).",
+        "extra": {}
+      }
+    ],
+    "paths_tried": 68,
+    "subdomains_applicable": false,
+    "subdomains_found": 0,
+    "robots_found": false,
+    "disallowed_paths_found": 0,
+    "sitemap_urls_found": 0,
+    "missing_security_headers": 5,
+    "risky_http_methods": [],
+    "tech_detected": [],
+    "duration_s": 1114.7414603233337
+  },
+  "nmap": {
+    "findings": [],
+    "open_ports": 0,
+    "duration_s": 341.7311522960663
+  },
+  "va": {
+    "findings": [],
+    "duration_s": 150.21436619758606,
+    "tool_errors": {
+      "nikto": "failed to parse nikto XML output: not well-formed (invalid token): line 4, column 1",
+      "cookies": "HTTPConnectionPool(host='10.15.20.21', port=3001): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='10.15.20.21', port=3001) at 0x7d738892bf20>, 'Connection to 10.15.20.21 timed out. (connect timeout=15)'))",
+      "zap": "ZAP API request failed: 400 Client Error: Bad Request for url: http://127.0.0.1:8098/JSON/ascan/action/scan/?url=http%3A%2F%2F10.15.20.21%3A3001&apikey=689dd5f59a3eeed26eba8f5284c3c95d"
+    },
+    "tools_run": [
+      "nikto",
+      "tls",
+      "cookies",
+      "sqlmap",
+      "wapiti",
+      "nuclei",
+      "osv-scanner",
+      "zap"
+    ]
+  },
+  "correlate": {
+    "executive_summary": "The assessment found a web service at http://10.15.20.21:3001/ that is missing multiple common HTTP security headers (HSTS, X-Content-Type-Options, X-Frame-Options, Content-Security-Policy, Referrer-Policy). These are configuration/hardening issues that increase the application\u2019s exposure to client-side risks such as clickjacking, MIME-type confusion, and information leakage, but no product/version information was available and no CVEs were identified. Overall risk from these missing headers is low, but they are straightforward to remediate and reduce attack surface. No other findings or version-specific vulnerabilities were reported by the provided agents or CVE lookup.",
+    "overall_risk_rating": "low",
+    "findings": [
+      {
+        "title": "Missing HTTP security headers (HSTS, X-Content-Type-Options, X-Frame-Options, Content-Security-Policy, Referrer-Policy)",
+        "category": "security_header",
+        "severity": "low",
+        "confidence": "confirmed",
+        "endpoint": "http://10.15.20.21:3001/",
+        "evidence": "recon: HTTP response from http://10.15.20.21:3001/ did not set the following headers: strict-transport-security (HSTS); x-content-type-options; x-frame-options; content-security-policy; referrer-policy. Observations taken directly from recon agent raw findings indicating each header was absent.",
+        "related_cves": [],
+        "source_agents": [
+          "recon"
+        ]
+      }
+    ],
+    "deduplication_notes": "Five separate recon findings reporting the absence of individual headers (strict-transport-security, x-content-type-options, x-frame-options, content-security-policy, referrer-policy) were consolidated into one finding titled 'Missing HTTP security headers' because they describe the same underlying hardening issue at the same endpoint. No other agent reported the same or additional related issues, and no CVEs applied (no service/version information available).",
+    "cve_lookups_performed": 0,
+    "rag_retrievals": 1,
+    "model_calls": 1,
+    "input_tokens": 1232,
+    "output_tokens": 1272,
+    "duration_s": 13.619619131088257,
+    "raw_input_finding_count": 5
+  },
+  "errors": {},
+  "duration_s": 1128.3649151325226
+}

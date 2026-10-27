@@ -1,0 +1,437 @@
+{
+  "run_id": "run-20261027T062252Z",
+  "target_origin": "https://juice-shop.herokuapp.com",
+  "recon": {
+    "findings": [
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /ftp",
+        "category": "exposed_path",
+        "severity": "medium",
+        "confidence": "confirmed",
+        "endpoint": "/ftp",
+        "evidence": "HTTP 200 on /ftp (differs from baseline 404 response); body sha256=b2b85673eb5ce940...",
+        "extra": {
+          "status_code": 200,
+          "elapsed_s": 0.15799283981323242
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /robots.txt",
+        "category": "exposed_path",
+        "severity": "medium",
+        "confidence": "confirmed",
+        "endpoint": "/robots.txt",
+        "evidence": "HTTP 200 on /robots.txt (differs from baseline 404 response); body sha256=09f7c2328189ecdd...",
+        "extra": {
+          "status_code": 200,
+          "elapsed_s": 0.19223833084106445
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "robots.txt Disallow lead: /ftp",
+        "category": "recon_lead",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/ftp",
+        "evidence": "Listed as Disallow in robots.txt -- the operator deliberately hid this path from crawlers, which often makes it worth a closer manual look.",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: strict-transport-security",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set strict-transport-security (enforces HTTPS on future visits (HSTS)).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: content-security-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set content-security-policy (restricts which sources scripts/styles/etc. may load from).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: referrer-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set referrer-policy (controls how much of the URL is leaked to other sites via the Referer header).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Technology fingerprint",
+        "category": "tech_fingerprint",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Detected: Heroku.",
+        "extra": {
+          "header_hints": {
+            "Server": "Heroku"
+          },
+          "body_matches": []
+        }
+      }
+    ],
+    "paths_tried": 68,
+    "subdomains_applicable": true,
+    "subdomains_found": 0,
+    "robots_found": true,
+    "disallowed_paths_found": 1,
+    "sitemap_urls_found": 0,
+    "missing_security_headers": 3,
+    "risky_http_methods": [],
+    "tech_detected": [
+      "Heroku"
+    ],
+    "duration_s": 73.83208227157593
+  },
+  "nmap": {
+    "findings": [],
+    "open_ports": 0,
+    "duration_s": 342.49964475631714
+  },
+  "va": {
+    "findings": [
+      {
+        "source_agent": "va",
+        "title": "Retrieved via header: 1.1 heroku-router",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Retrieved via header: 1.1 heroku-router [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999986",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Server leaks inodes via ETags, header found with file /, fields: 0xW/2700 0x1a17c05cfd3",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Server leaks inodes via ETags, header found with file /, fields: 0xW/2700 0x1a17c05cfd3 [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999984",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'nel' found, with contents: {\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'nel' found, with contents: {\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1} [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'x-content-type-options' found, with contents: nosniff",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'x-content-type-options' found, with contents: nosniff [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'feature-policy' found, with contents: payment 'self'",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'feature-policy' found, with contents: payment 'self' [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'x-recruiting' found, with contents: /#/jobs",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'x-recruiting' found, with contents: /#/jobs [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'x-frame-options' found, with contents: SAMEORIGIN",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'x-frame-options' found, with contents: SAMEORIGIN [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'reporting-endpoints' found, with contents: heroku-nel=\"https://nel.heroku.com/reports?s=d8GjO8rPsR7k93%",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'reporting-endpoints' found, with contents: heroku-nel=\"https://nel.heroku.com/reports?s=d8GjO8rPsR7k93%2FHWBaWAE%2BaoNIiwbg2tPiFpWztNHo%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1793082173\" [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'report-to' found, with contents: {\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/repo",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'report-to' found, with contents: {\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=d8GjO8rPsR7k93%2FHWBaWAE%2BaoNIiwbg2tPiFpWztNHo%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1793082173\"}],\"max_age\":3600} [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'access-control-allow-origin' found, with contents: *",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'access-control-allow-origin' found, with contents: * [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "File/dir '/ftp/' in robots.txt returned a non-forbidden or redirect HTTP code (200)",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443//ftp/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443//ftp/): File/dir '/ftp/' in robots.txt returned a non-forbidden or redirect HTTP code (200) [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999996",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "\"robots.txt\" contains 1 entry which should be manually viewed.",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/robots.txt",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/robots.txt): \"robots.txt\" contains 1 entry which should be manually viewed. [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999996",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Server is using a wildcard certificate: '*.herokuapp.com'",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Server is using a wildcard certificate: '*.herokuapp.com' [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999992",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'access-control-allow-methods' found, with contents: GET,HEAD,PUT,PATCH,POST,DELETE",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (OPTIONS https://juice-shop.herokuapp.com:443/): Uncommon header 'access-control-allow-methods' found, with contents: GET,HEAD,PUT,PATCH,POST,DELETE [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "OPTIONS"
+        }
+      }
+    ],
+    "duration_s": 128.83327436447144,
+    "tool_errors": {
+      "zap": "ZAP daemon did not become ready within the startup timeout"
+    },
+    "tools_run": [
+      "nikto",
+      "tls",
+      "cookies",
+      "sqlmap",
+      "wapiti",
+      "nuclei",
+      "osv-scanner",
+      "zap"
+    ]
+  },
+  "correlate": {
+    "executive_summary": "The assessment discovered a mix of informational and low-to-medium risk issues on https://juice-shop.herokuapp.com/. A discoverable /ftp path (also referenced in robots.txt) returned HTTP 200 and should be reviewed for sensitive content. Several security headers that harden browsers (HSTS, CSP, Referrer-Policy) are not present, while numerous platform/reporting headers and a permissive CORS value were observed. No matching CVE entries were available for detected services/versions, so no severity/confidence was upgraded based on CVEs.",
+    "overall_risk_rating": "medium",
+    "findings": [
+      {
+        "title": "Discoverable directory: /ftp",
+        "category": "exposed_path",
+        "severity": "medium",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/ftp",
+        "evidence": "recon: HTTP 200 on /ftp (differs from baseline 404); body sha256=b2b85673eb5ce940...; va/nikto: File/dir '/ftp/' in robots.txt returned a non-forbidden or redirect HTTP code (200) (nikto GET https://juice-shop.herokuapp.com:443//ftp/).",
+        "related_cves": [],
+        "source_agents": [
+          "recon",
+          "va"
+        ]
+      },
+      {
+        "title": "robots.txt discloses a disallowed path (/ftp)",
+        "category": "recon_lead",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/robots.txt",
+        "evidence": "recon: HTTP 200 on /robots.txt; recon: Listed as Disallow in robots.txt -- '/ftp'; va/nikto: '\"robots.txt\" contains 1 entry which should be manually viewed.' (nikto GET https://juice-shop.herokuapp.com:443/robots.txt).",
+        "related_cves": [],
+        "source_agents": [
+          "recon",
+          "va"
+        ]
+      },
+      {
+        "title": "Missing security headers: Strict-Transport-Security, Content-Security-Policy, Referrer-Policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "recon: Response did not set strict-transport-security; recon: Response did not set content-security-policy; recon: Response did not set referrer-policy.",
+        "related_cves": [],
+        "source_agents": [
+          "recon"
+        ]
+      },
+      {
+        "title": "Permissive CORS header observed (Access-Control-Allow-Origin: *)",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "va/nikto (OPTIONS https://juice-shop.herokuapp.com:443/): Uncommon header 'access-control-allow-origin' found, with contents: *.",
+        "related_cves": [],
+        "source_agents": [
+          "va"
+        ]
+      },
+      {
+        "title": "Platform and server-identifying headers (Heroku) and wildcard certificate",
+        "category": "http_vuln",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "recon: Detected: Heroku (Server header 'Heroku'); va/nikto: Retrieved via header: '1.1 heroku-router'; va/nikto: Server is using a wildcard certificate: '*.herokuapp.com'.",
+        "related_cves": [],
+        "source_agents": [
+          "recon",
+          "va"
+        ]
+      },
+      {
+        "title": "ETag header reveals file identifiers/inodes",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "va/nikto (GET https://juice-shop.herokuapp.com:443/): Server leaks inodes via ETags, header found with file /, fields: 0xW/2700 0x1a17c05cfd3.",
+        "related_cves": [],
+        "source_agents": [
+          "va"
+        ]
+      },
+      {
+        "title": "Various additional response headers observed (NEL, Reporting-Endpoints, Report-To, Feature-Policy, X-Content-Type-Options, X-Frame-Options, X-Recruiting, Access-Control-Allow-Methods)",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "va/nikto: Uncommon header 'nel' found (\"report_to\":\"heroku-nel\" ...); 'reporting-endpoints' found; 'report-to' found; 'feature-policy' payment 'self'; 'x-content-type-options' nosniff; 'x-frame-options' SAMEORIGIN; 'x-recruiting' with '/#/jobs'; 'access-control-allow-methods' contains GET,HEAD,PUT,PATCH,POST,DELETE (see multiple nikto GET/OPTIONS outputs).",
+        "related_cves": [],
+        "source_agents": [
+          "va"
+        ]
+      }
+    ],
+    "deduplication_notes": "Merged recon and nikto findings that described the same underlying issue: the /ftp path was reported by recon (HTTP 200) and by nikto (file/dir '/ftp/' returned 200) \u2014 these were combined into a single /ftp finding. The robots.txt entries reported by recon and nikto were also merged. Multiple nikto observations of response headers were grouped into two findings: a single grouping for the permissive CORS header and a separate grouping for other uncommon/extra headers; missing security headers reported by recon were left as a separate finding (not merged) because nikto did not contradict their absence.",
+    "cve_lookups_performed": 0,
+    "rag_retrievals": 0,
+    "model_calls": 1,
+    "input_tokens": 3720,
+    "output_tokens": 3304,
+    "duration_s": 27.622374296188354,
+    "raw_input_finding_count": 21
+  },
+  "errors": {},
+  "duration_s": 370.12708353996277
+}

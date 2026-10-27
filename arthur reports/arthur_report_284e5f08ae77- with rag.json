@@ -1,0 +1,237 @@
+{
+  "run_id": "run-20261027T062635Z",
+  "target_origin": "https://juice-shop.herokuapp.com",
+  "recon": {
+    "findings": [
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: strict-transport-security",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set strict-transport-security (enforces HTTPS on future visits (HSTS)).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: x-content-type-options",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set x-content-type-options (stops the browser guessing/sniffing a response's MIME type).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: x-frame-options",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set x-frame-options (mitigates clickjacking by controlling framing).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: content-security-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set content-security-policy (restricts which sources scripts/styles/etc. may load from).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: referrer-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Response did not set referrer-policy (controls how much of the URL is leaked to other sites via the Referer header).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Technology fingerprint",
+        "category": "tech_fingerprint",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "Detected: Heroku.",
+        "extra": {
+          "header_hints": {
+            "Server": "Heroku"
+          },
+          "body_matches": []
+        }
+      }
+    ],
+    "paths_tried": 68,
+    "subdomains_applicable": true,
+    "subdomains_found": 0,
+    "robots_found": false,
+    "disallowed_paths_found": 0,
+    "sitemap_urls_found": 0,
+    "missing_security_headers": 5,
+    "risky_http_methods": [],
+    "tech_detected": [
+      "Heroku"
+    ],
+    "duration_s": 310.66268658638
+  },
+  "nmap": {
+    "findings": [],
+    "open_ports": 0,
+    "duration_s": 342.32293725013733
+  },
+  "va": {
+    "findings": [
+      {
+        "source_agent": "va",
+        "title": "Retrieved via header: 1.1 heroku-router",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Retrieved via header: 1.1 heroku-router [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999986",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "The anti-clickjacking X-Frame-Options header is not present.",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): The anti-clickjacking X-Frame-Options header is not present. [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999976",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'reporting-endpoints' found, with contents: heroku-nel=\"https://nel.heroku.com/reports?s=QeDxORQPvO0T%2F",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'reporting-endpoints' found, with contents: heroku-nel=\"https://nel.heroku.com/reports?s=QeDxORQPvO0T%2F7AtmieXfE8xjRhwJtGu4NPSxY3kP10%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1793082404\" [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'report-to' found, with contents: {\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/repo",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'report-to' found, with contents: {\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=QeDxORQPvO0T%2F7AtmieXfE8xjRhwJtGu4NPSxY3kP10%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1793082404\"}],\"max_age\":3600} [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'nel' found, with contents: {\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "https://juice-shop.herokuapp.com:443/",
+        "evidence": "nikto (GET https://juice-shop.herokuapp.com:443/): Uncommon header 'nel' found, with contents: {\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1} [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      }
+    ],
+    "duration_s": 132.8295032978058,
+    "tool_errors": {
+      "zap": "ZAP daemon did not become ready within the startup timeout"
+    },
+    "tools_run": [
+      "nikto",
+      "tls",
+      "cookies",
+      "sqlmap",
+      "wapiti",
+      "nuclei",
+      "osv-scanner",
+      "zap"
+    ]
+  },
+  "correlate": {
+    "executive_summary": "The assessment found several HTTP hardening issues and informational server metadata on https://juice-shop.herokuapp.com/. Missing common security headers (HSTS, X-Content-Type-Options, X-Frame-Options, Content-Security-Policy, Referrer-Policy) were observed, which increase exposure to clickjacking, MIME-type confusion, mixed-content and information-leakage risks. The host is identified as running on the Heroku platform (server header and heroku-router evidence). Nikto also reported uncommon reporting/telemetry headers (reporting-endpoints, report-to, nel) which are informational and not direct vulnerabilities. No product/service version strings were available for CVE correlation, so no CVE matches were identified for these observations.",
+    "overall_risk_rating": "low",
+    "findings": [
+      {
+        "title": "Missing HTTP security headers (HSTS, X-Content-Type-Options, X-Frame-Options, CSP, Referrer-Policy)",
+        "category": "hardening",
+        "severity": "low",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "recon: Multiple responses did not set strict-transport-security, x-content-type-options, x-frame-options, content-security-policy, referrer-policy. va (nikto): The anti-clickjacking X-Frame-Options header is not present (nikto GET https://juice-shop.herokuapp.com:443/).",
+        "related_cves": [],
+        "source_agents": [
+          "recon",
+          "va"
+        ]
+      },
+      {
+        "title": "Platform fingerprint: Heroku identified via headers",
+        "category": "information",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "recon: Detected: Heroku (Server header hint). va (nikto): Retrieved via header: 1.1 heroku-router observed in response (nikto GET https://juice-shop.herokuapp.com:443/).",
+        "related_cves": [],
+        "source_agents": [
+          "recon",
+          "va"
+        ]
+      },
+      {
+        "title": "Uncommon reporting/telemetry headers present (reporting-endpoints, report-to, nel)",
+        "category": "information",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://juice-shop.herokuapp.com/",
+        "evidence": "va (nikto): Uncommon header 'reporting-endpoints' found with heroku-nel value; 'report-to' header present with heroku-nel group and endpoints; 'nel' header present with report_to and response_headers fields (nikto GET https://juice-shop.herokuapp.com:443/).",
+        "related_cves": [],
+        "source_agents": [
+          "va"
+        ]
+      }
+    ],
+    "deduplication_notes": "Merged multiple recon findings about missing individual security headers into a single consolidated hardening finding (includes HSTS, X-Content-Type-Options, X-Frame-Options, CSP, Referrer-Policy). Merged the recon technology fingerprint (Heroku) and nikto 'heroku-router' observation into one platform identification finding. Grouped the three nikto 'uncommon header' observations (reporting-endpoints, report-to, nel) into a single informational finding about reporting/telemetry headers.",
+    "cve_lookups_performed": 0,
+    "rag_retrievals": 1,
+    "model_calls": 1,
+    "input_tokens": 2360,
+    "output_tokens": 1888,
+    "duration_s": 11.189212083816528,
+    "raw_input_finding_count": 11
+  },
+  "errors": {},
+  "duration_s": 353.5167076587677
+}

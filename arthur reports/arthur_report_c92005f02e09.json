@@ -1,0 +1,927 @@
+{
+  "run_id": "run-20261026T211929Z",
+  "target_origin": "https://yashinfosec.com",
+  "recon": {
+    "findings": [
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /.env",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/.env",
+        "evidence": "HTTP 403 on /.env (differs from baseline 404 response); body sha256=c029d1c560ecb35b...",
+        "extra": {
+          "status_code": 403,
+          "elapsed_s": 0.09641051292419434
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /.env.example",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/.env.example",
+        "evidence": "HTTP 403 on /.env.example (differs from baseline 404 response); body sha256=c029d1c560ecb35b...",
+        "extra": {
+          "status_code": 403,
+          "elapsed_s": 0.1461169719696045
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /.git/config",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/.git/config",
+        "evidence": "HTTP 403 on /.git/config (differs from baseline 404 response); body sha256=c029d1c560ecb35b...",
+        "extra": {
+          "status_code": 403,
+          "elapsed_s": 0.18066954612731934
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /.git/HEAD",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/.git/HEAD",
+        "evidence": "HTTP 403 on /.git/HEAD (differs from baseline 404 response); body sha256=c029d1c560ecb35b...",
+        "extra": {
+          "status_code": 403,
+          "elapsed_s": 0.08366060256958008
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /phpinfo.php",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/phpinfo.php",
+        "evidence": "HTTP 403 on /phpinfo.php (differs from baseline 404 response); body sha256=c029d1c560ecb35b...",
+        "extra": {
+          "status_code": 403,
+          "elapsed_s": 0.19901299476623535
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /wp-admin",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/wp-admin",
+        "evidence": "HTTP 301 on /wp-admin (differs from baseline 404 response); body sha256=e8b101a7c7f64aad...",
+        "extra": {
+          "status_code": 301,
+          "elapsed_s": 0.2716093063354492
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /wp-content",
+        "category": "exposed_path",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "/wp-content",
+        "evidence": "HTTP 301 on /wp-content (differs from baseline 404 response); body sha256=e8b101a7c7f64aad...",
+        "extra": {
+          "status_code": 301,
+          "elapsed_s": 0.2801182270050049
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Discoverable path: /wp-login.php",
+        "category": "exposed_path",
+        "severity": "medium",
+        "confidence": "confirmed",
+        "endpoint": "/wp-login.php",
+        "evidence": "HTTP 200 on /wp-login.php (differs from baseline 404 response); body sha256=11e85ef11c4a137a...",
+        "extra": {
+          "status_code": 200,
+          "elapsed_s": 2.895278215408325
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Subdomain resolves: www.yashinfosec.com",
+        "category": "subdomain",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "www.yashinfosec.com",
+        "evidence": "www.yashinfosec.com resolves to 185.77.97.231. NOTE: this is recon information only -- it is NOT automatically in scope for further testing without separate authorization.",
+        "extra": {
+          "resolved_ip": "185.77.97.231"
+        }
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: strict-transport-security",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://yashinfosec.com/",
+        "evidence": "Response did not set strict-transport-security (enforces HTTPS on future visits (HSTS)).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: x-content-type-options",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://yashinfosec.com/",
+        "evidence": "Response did not set x-content-type-options (stops the browser guessing/sniffing a response's MIME type).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: x-frame-options",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://yashinfosec.com/",
+        "evidence": "Response did not set x-frame-options (mitigates clickjacking by controlling framing).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Missing security header: referrer-policy",
+        "category": "security_header",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "https://yashinfosec.com/",
+        "evidence": "Response did not set referrer-policy (controls how much of the URL is leaked to other sites via the Referer header).",
+        "extra": {}
+      },
+      {
+        "source_agent": "recon",
+        "title": "Technology fingerprint",
+        "category": "tech_fingerprint",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "https://yashinfosec.com/",
+        "evidence": "Detected: hcdn.",
+        "extra": {
+          "header_hints": {
+            "Server": "hcdn"
+          },
+          "body_matches": []
+        }
+      }
+    ],
+    "paths_tried": 68,
+    "subdomains_applicable": true,
+    "subdomains_found": 1,
+    "robots_found": false,
+    "disallowed_paths_found": 0,
+    "sitemap_urls_found": 0,
+    "missing_security_headers": 4,
+    "risky_http_methods": [],
+    "tech_detected": [
+      "hcdn"
+    ],
+    "duration_s": 28.747548580169678
+  },
+  "nmap": {
+    "findings": [
+      {
+        "source_agent": "nmap",
+        "title": "Open port 80/tcp: http",
+        "category": "service_version",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "nmap -sV detected http (nginx) on tcp/80, state=open",
+        "extra": {
+          "port": 80,
+          "protocol": "tcp",
+          "product": "nginx",
+          "version": null,
+          "cpe": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "Open port 443/tcp: https",
+        "category": "service_version",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "nmap -sV detected https (hcdn) on tcp/443, state=open",
+        "extra": {
+          "port": 443,
+          "protocol": "tcp",
+          "product": "hcdn",
+          "version": null,
+          "cpe": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-comments-displayer",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "Couldn't find any comments.",
+        "extra": {
+          "script_id": "http-comments-displayer",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-csrf",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "Couldn't find any CSRF vulnerabilities.",
+        "extra": {
+          "script_id": "http-csrf",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-aspnet-debug",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "ERROR: Script execution failed (use -d to debug)",
+        "extra": {
+          "script_id": "http-aspnet-debug",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-server-header",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "hcdn",
+        "extra": {
+          "script_id": "http-server-header",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-mobileversion-checker",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "No mobile version detected.",
+        "extra": {
+          "script_id": "http-mobileversion-checker",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-stored-xss",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "Couldn't find any stored XSS vulnerabilities.",
+        "extra": {
+          "script_id": "http-stored-xss",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-grep",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "\n  (1) http://yashinfosec.com:80/: \n    (1) email: \n      + info@example.com",
+        "extra": {
+          "script_id": "http-grep",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-headers",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "\n  Date: Mon, 26 Oct 2026 21:20:34 GMT\n  Content-Type: text/html\n  Transfer-Encoding: chunked\n  Connection: close\n  Vary: Accept-Encoding\n  Cache-Control: no-store\n  Server: hcdn\n  alt-svc: h3=\":443\"; ma=86400\n  x-hcdn-request-id: 3f113e1e38f6dc71c76107ba58667dc1-fast-edge8\n  \n  (Request type: GET)\n",
+        "extra": {
+          "script_id": "http-headers",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-useragent-tester",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "\n  Allowed User Agents: \n    Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)\n    libwww\n    lwp-trivial\n    libcurl-agent/1.0\n    PHP/\n    Python-urllib/2.5\n    GT::WWW\n    Snoopy\n    MFC_Tear_Sample\n    HTTP::Lite\n    PHPCrawl\n    URI::Fetch\n    Zend_Http_Client\n    http client\n    PECL::HTTP\n    Wget/1.13.4 (linux-gnu)\n    WWW-Mechanize/1.34",
+        "extra": {
+          "script_id": "http-useragent-tester",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-vuln-cve2014-3704",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "ERROR: Script execution failed (use -d to debug)",
+        "extra": {
+          "script_id": "http-vuln-cve2014-3704",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-traceroute",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "ERROR: Script execution failed (use -d to debug)",
+        "extra": {
+          "script_id": "http-traceroute",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-security-headers",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "",
+        "extra": {
+          "script_id": "http-security-headers",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-dombased-xss",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "Couldn't find any DOM based XSS.",
+        "extra": {
+          "script_id": "http-dombased-xss",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-fetch",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "Please enter the complete path of the directory to save data in.",
+        "extra": {
+          "script_id": "http-fetch",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-xssed",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "No previously reported XSS vuln.",
+        "extra": {
+          "script_id": "http-xssed",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-referer-checker",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "\nSpidering limited to: maxpagecount=30\n  https://www.googletagmanager.com:443/gtag/js?id=UA-26575989-44\n",
+        "extra": {
+          "script_id": "http-referer-checker",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-title",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "400 The plain HTTP request was sent to HTTPS port",
+        "extra": {
+          "script_id": "http-title",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-dombased-xss",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Couldn't find any DOM based XSS.",
+        "extra": {
+          "script_id": "http-dombased-xss",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-xssed",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "No previously reported XSS vuln.",
+        "extra": {
+          "script_id": "http-xssed",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-date",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Mon, 26 Oct 2026 21:20:26 GMT; -1s from local time.",
+        "extra": {
+          "script_id": "http-date",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-headers",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "\n  Date: Mon, 26 Oct 2026 21:20:32 GMT\n  Content-Type: text/html\n  Content-Length: 248\n  Connection: close\n  Server: hcdn\n  alt-svc: h3=\":443\"; ma=86400\n  x-hcdn-request-id: 7f7e5bfb9ad4ed6f4104dde0e0c064b2-fast-edge8\n  \n  (Request type: GET)\n",
+        "extra": {
+          "script_id": "http-headers",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-referer-checker",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Couldn't find any cross-domain scripts.",
+        "extra": {
+          "script_id": "http-referer-checker",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-security-headers",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "\n  Strict_Transport_Security: \n    HSTS not configured in HTTPS Server",
+        "extra": {
+          "script_id": "http-security-headers",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-useragent-tester",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "\n  Status for browser useragent: 400\n  Allowed User Agents: \n    Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)\n    libwww\n    lwp-trivial\n    libcurl-agent/1.0\n    PHP/\n    Python-urllib/2.5\n    GT::WWW\n    Snoopy\n    MFC_Tear_Sample\n    HTTP::Lite\n    PHPCrawl\n    URI::Fetch\n    Zend_Http_Client\n    http client\n    PECL::HTTP\n    Wget/1.13.4 (linux-gnu)\n    WWW-Mechanize/1.34",
+        "extra": {
+          "script_id": "http-useragent-tester",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-csrf",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Couldn't find any CSRF vulnerabilities.",
+        "extra": {
+          "script_id": "http-csrf",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-stored-xss",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Couldn't find any stored XSS vulnerabilities.",
+        "extra": {
+          "script_id": "http-stored-xss",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-fetch",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Please enter the complete path of the directory to save data in.",
+        "extra": {
+          "script_id": "http-fetch",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-server-header",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "hcdn",
+        "extra": {
+          "script_id": "http-server-header",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-mobileversion-checker",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "No mobile version detected.",
+        "extra": {
+          "script_id": "http-mobileversion-checker",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: http-comments-displayer",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:443",
+        "evidence": "Couldn't find any comments.",
+        "extra": {
+          "script_id": "http-comments-displayer",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: ip-geolocation-geoplugin",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "",
+        "extra": {
+          "script_id": "ip-geolocation-geoplugin",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: fcrdns",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "FAIL (No PTR record)",
+        "extra": {
+          "script_id": "fcrdns",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: dns-blacklist",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "\n  SPAM\n    all.spamrats.com - FAIL\n    list.quorum.to - SPAM\n",
+        "extra": {
+          "script_id": "dns-blacklist",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: asn-query",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "\nBGP: 195.200.8.0/22 | Country: DE\n  Origin AS: 47583 - AS-HOSTINGER - Hostinger International Limited, CY\n    Peer AS: 174 61323",
+        "extra": {
+          "script_id": "asn-query",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: clock-skew",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "-1s",
+        "extra": {
+          "script_id": "clock-skew",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: resolveall",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "\n  Host 'yashinfosec.com' also resolves to:\n    91.108.103.243\n  Use the 'newtargets' script-arg to add the results as targets\n  Use the --resolve-all option to scan all resolved addresses without using this script.\n",
+        "extra": {
+          "script_id": "resolveall",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: whois-domain",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "\n\nDomain name record found at whois.verisign-grs.com\n   Domain Name: YASHINFOSEC.COM\r\n   Registry Domain ID: 2764035462_DOMAIN_COM-VRSN\r\n   Registrar WHOIS Server: whois.yoursrs.com\r\n   Registrar URL: http://www.realtimeregister.com\r\n   Updated Date: 2026-02-12T18:52:30Z\r\n   Creation Date: 2023-03-10T06:41:00Z\r\n   Registry Expiry Date: 2027-03-10T06:41:00Z\r\n   Registrar: Realtime Register B.V.\r\n   Registrar IANA ID: 839\r\n   Registrar Abuse Contact Email: rtr-security-threats@realtimeregister.com\r\n   Registrar Abuse Contact Phone: +31.384530759\r\n   Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\n   Name Server: NS1.DNS-PARKING.COM\r\n   Name Server: NS2.DNS-PARKING.COM\r\n   DNSSEC: unsigned\r\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of whois database: 2026-10-26T21:20:12Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nNOTICE: The expiration date displaye",
+        "extra": {
+          "script_id": "whois-domain",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: port-states",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "\n  tcp: \n    open: 80,443\n    filtered: 1,3,7,9,13,17,19,21-23,25-26,37,53,79,81-82,88,100,106,110-111,113,119,135,139,143-144,179,199,254-255,280,311,389,427,444-445,464-465,497,513-515,543-544,548,554,587,593,625,631,636,646,787,808,873,902,990,993,995,1000,1022,1024-1033,1035-1041,1044,1048-1050,1053-1054,1056,1058-1059,1064-1066,1069,1071,1074,1080,1110,1234,1433,1494,1521,1720,1723,1755,1761,1801,1900,1935,1998,2000-2003,2005,2049,2103,2105,2107,2121,2161,2301,2383,2401,2601,2717,2869,2967,3000-3001,3128,3268,3306,3389,3689-3690,3703,3986,4000-4001,4045,4899,5000-5001,5003,5009,5050-5051,5060,5101,5120,5190,5357,5432,5555,5631,5666,5800,5900-5901,6000-6002,6004,6112,6646,6666,7000,7070,7937-7938,8000,8002,8008-8010,8031,8080-8081,8443,8888,9000-9001,9090,9100,9102,9999-10001,10010,32768,32771,49152-49157,50000",
+        "extra": {
+          "script_id": "port-states",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: whois-ip",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "Record found at whois.ripe.net\ninetnum: 195.200.8.0 - 195.200.11.255\nnetname: HOSTINGER-HOSTING\ncountry: GB",
+        "extra": {
+          "script_id": "whois-ip",
+          "cves_mentioned": []
+        }
+      },
+      {
+        "source_agent": "nmap",
+        "title": "NSE script result: dns-zeustracker",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com",
+        "evidence": "\n  Name                                         IP   SBL  ASN  Country  Status  Level    Files Online  Date added\n  swisssign-check=5vzzpoKf9xfvDXpbfCgSoxCLWCg  nil  nil  nil  nil      nil     Unknown  nil           nil\n",
+        "extra": {
+          "script_id": "dns-zeustracker",
+          "cves_mentioned": []
+        }
+      }
+    ],
+    "open_ports": 2,
+    "duration_s": 196.39066243171692
+  },
+  "va": {
+    "findings": [
+      {
+        "source_agent": "va",
+        "title": "The anti-clickjacking X-Frame-Options header is not present.",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "http://yashinfosec.com:443/",
+        "evidence": "nikto (GET http://yashinfosec.com:443/): The anti-clickjacking X-Frame-Options header is not present. [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999976",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'alt-svc' found, with contents: h3=\":443\"; ma=86400",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "http://yashinfosec.com:443/",
+        "evidence": "nikto (GET http://yashinfosec.com:443/): Uncommon header 'alt-svc' found, with contents: h3=\":443\"; ma=86400 [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Uncommon header 'x-hcdn-request-id' found, with contents: 7c77de74c5525a10f775174047dc08e2-fast-edge7",
+        "category": "http_vuln",
+        "severity": "low",
+        "confidence": "suspected",
+        "endpoint": "http://yashinfosec.com:443/",
+        "evidence": "nikto (GET http://yashinfosec.com:443/): Uncommon header 'x-hcdn-request-id' found, with contents: 7c77de74c5525a10f775174047dc08e2-fast-edge7 [OSVDB: 0]",
+        "extra": {
+          "tool": "nikto",
+          "nikto_id": "999100",
+          "osvdb": "0",
+          "method": "GET"
+        }
+      },
+      {
+        "source_agent": "va",
+        "title": "Cross Site Request Forgery: /wp-comments-post.php",
+        "category": "webapp_vuln",
+        "severity": "medium",
+        "confidence": "suspected",
+        "endpoint": "POST /wp-comments-post.php",
+        "evidence": "Lack of anti CSRF token",
+        "extra": {
+          "tool": "wapiti",
+          "module": "csrf"
+        }
+      }
+    ],
+    "duration_s": 121.87844276428223,
+    "tool_errors": {
+      "zap": "ZAP API request failed: 400 Client Error: Bad Request for url: http://127.0.0.1:8098/JSON/ascan/action/scan/?url=https%3A%2F%2Fyashinfosec.com&apikey=daea4fba15c37fe002b8689e514f52b0"
+    },
+    "tools_run": [
+      "nikto",
+      "tls",
+      "cookies",
+      "sqlmap",
+      "wapiti",
+      "nuclei",
+      "osv-scanner",
+      "zap"
+    ]
+  },
+  "correlate": {
+    "executive_summary": "The assessment discovered multiple information-disclosure issues and an exposed application surface that increases attack surface. Reconnaissance identified WordPress endpoints (including a reachable /wp-login.php) and evidence that repository/configuration artifacts exist on the host (.env, .git/*, phpinfo.php). Several recommended security headers are not set. Network/service fingerprinting shows nginx on port 80 and an hcdn front-end on HTTPS; no product-version CVEs could be applied because the automated CVE lookup failed.",
+    "overall_risk_rating": "medium",
+    "findings": [
+      {
+        "title": "Potentially sensitive files and repository artifacts discoverable (.env, .env.example, .git/config, .git/HEAD, phpinfo.php)",
+        "category": "exposed_path",
+        "severity": "medium",
+        "confidence": "confirmed",
+        "endpoint": "/.env, /.env.example, /.git/config, /.git/HEAD, /phpinfo.php",
+        "evidence": "recon: HTTP 403 responses observed on /.env, /.env.example, /.git/config, /.git/HEAD, /phpinfo.php that differ from baseline 404 responses (recon agent reported distinct 403 responses and included response-body hash c029d1c560ecb35b...). These responses indicate the presence of these files/paths even where direct access is denied.",
+        "related_cves": [],
+        "source_agents": [
+          "recon"
+        ]
+      },
+      {
+        "title": "WordPress presence and accessible login endpoint (/wp-login.php, /wp-admin, /wp-content)",
+        "category": "exposed_path",
+        "severity": "medium",
+        "confidence": "confirmed",
+        "endpoint": "/wp-login.php, /wp-admin, /wp-content",
+        "evidence": "recon: /wp-login.php returned HTTP 200 (body sha256=11e85ef11c4a137a...), /wp-admin and /wp-content returned HTTP 301 redirects \u2014 these responses differ from baseline 404 and indicate an active WordPress installation or WordPress routes.",
+        "related_cves": [],
+        "source_agents": [
+          "recon"
+        ]
+      },
+      {
+        "title": "Missing security headers (Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options, Referrer-Policy)",
+        "category": "security_header",
+        "severity": "low",
+        "confidence": "confirmed",
+        "endpoint": "https://yashinfosec.com/",
+        "evidence": "recon: Responses from https://yashinfosec.com/ did not set strict-transport-security, x-content-type-options, x-frame-options or referrer-policy. nmap http-headers output (Server: hcdn, Cache-Control: no-store, alt-svc: ...) also does not show these headers.",
+        "related_cves": [],
+        "source_agents": [
+          "recon",
+          "nmap"
+        ]
+      },
+      {
+        "title": "Server/service fingerprint: hcdn on HTTPS and nginx on HTTP",
+        "category": "tech_fingerprint",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "yashinfosec.com:80, yashinfosec.com:443",
+        "evidence": "nmap -sV detected http (nginx) on tcp/80 and https (hcdn) on tcp/443 (nmap). recon header hints also showed Server: hcdn.",
+        "related_cves": [],
+        "source_agents": [
+          "nmap",
+          "recon"
+        ]
+      },
+      {
+        "title": "Open HTTP and HTTPS ports observed (80/tcp, 443/tcp)",
+        "category": "service_version",
+        "severity": "info",
+        "confidence": "confirmed",
+        "endpoint": "yashinfosec.com:80, yashinfosec.com:443",
+        "evidence": "nmap: tcp/80 and tcp/443 in state=open (nmap -sV results).",
+        "related_cves": [],
+        "source_agents": [
+          "nmap"
+        ]
+      },
+      {
+        "title": "Contact email discovered in page content (http-grep output)",
+        "category": "information_disclosure",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "nmap http-grep script output included 'email: info@example.com' on http://yashinfosec.com:80/ (nmap script http-grep).",
+        "related_cves": [],
+        "source_agents": [
+          "nmap"
+        ]
+      },
+      {
+        "title": "Summary of NSE script checks (automated checks returned no confirmed vulnerabilities)",
+        "category": "nse_script",
+        "severity": "info",
+        "confidence": "suspected",
+        "endpoint": "yashinfosec.com:80",
+        "evidence": "nmap: multiple NSE scripts ran (http-comments-displayer, http-csrf, http-stored-xss, http-dombased-xss, http-useragent-tester, etc.). Outputs either reported no issues (e.g. 'Couldn't find any comments/CSRF/stored XSS/DOM XSS') or failed to execute for some scripts (errors). No script produced a confirmed 'VULNERABLE' result or linked CVEs in the provided outputs.",
+        "related_cves": [],
+        "source_agents": [
+          "nmap"
+        ]
+      }
+    ],
+    "deduplication_notes": "Multiple recon entries reporting individual discoverable paths were combined into grouped findings: (1) sensitive/config artifacts (.env, .env.example, .git/config, .git/HEAD, phpinfo.php) and (2) WordPress-related endpoints (/wp-login.php, /wp-admin, /wp-content). The separate recon security-header findings were consolidated into a single 'Missing security headers' finding. The recon 'Technology fingerprint: hcdn' and the nmap server/banner detection of 'hcdn' were merged into one fingerprint finding. Nmap's many individual NSE script outputs were summarized into a single NSE-script summary finding. No CVEs were attached to any finding because the automated CVE lookup for the detected products (nginx, hcdn) failed; therefore CVE-based severity/confidence upgrades were not applied.",
+    "cve_lookups_performed": 2,
+    "rag_retrievals": 3,
+    "model_calls": 1,
+    "input_tokens": 4921,
+    "output_tokens": 3171,
+    "duration_s": 46.400036573410034,
+    "raw_input_finding_count": 60
+  },
+  "errors": {},
+  "duration_s": 242.79611563682556
+}
