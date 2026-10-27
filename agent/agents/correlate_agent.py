@@ -66,6 +66,54 @@ OUTPUT_SCHEMA_HINT = """Return a JSON object with exactly this shape:
 """
 
 
+# Previously the raw findings JSON was hard-sliced at 12,000 characters,
+# which silently cut off whatever came last (in practice ZAP's alerts,
+# since VA findings are appended after recon/nmap) and could cut the JSON
+# mid-object. Now every finding is sent. Repeated alerts are grouped
+# losslessly (all endpoints kept, with an occurrence count) so the model
+# sees one entry per distinct issue instead of ~100 near-identical copies.
+MAX_EVIDENCE_CHARS = 400
+
+_SEVERITY_RANK = {"critical": 4, "high": 3, "medium": 2, "low": 1, "info": 0}
+
+
+def compact_findings(findings: list[Finding]) -> list[dict]:
+    """Group identical observations without discarding any of them.
+
+    Findings sharing agent, tool, title, category and severity become one
+    group listing every endpoint they were seen on plus an occurrence
+    count. Groups are ordered highest-severity first.
+    """
+    groups: dict[tuple, dict] = {}
+    for f in findings:
+        tool = (f.extra or {}).get("tool", "")
+        key = (f.source_agent, tool, f.title, f.category, f.severity)
+        g = groups.get(key)
+        if g is None:
+            g = {
+                "source_agent": f.source_agent,
+                "tool": tool,
+                "title": f.title,
+                "category": f.category,
+                "severity": f.severity,
+                "confidence": f.confidence,
+                "occurrences": 0,
+                "endpoints": [],
+                "sample_evidence": (f.evidence or "")[:MAX_EVIDENCE_CHARS],
+            }
+            groups[key] = g
+        g["occurrences"] += 1
+        if f.confidence == "confirmed":
+            g["confidence"] = "confirmed"
+        if f.endpoint and f.endpoint not in g["endpoints"]:
+            g["endpoints"].append(f.endpoint)
+
+    return sorted(
+        groups.values(),
+        key=lambda g: (-_SEVERITY_RANK.get(g["severity"], 0), -g["occurrences"], g["title"]),
+    )
+
+
 @dataclass
 class CorrelateAgentResult:
     executive_summary: str = ""
@@ -79,6 +127,7 @@ class CorrelateAgentResult:
     output_tokens: int = 0
     duration_s: float = 0.0
     raw_input_finding_count: int = 0
+    grouped_finding_count: int = 0
 
 
 def run_correlate_agent(
@@ -150,10 +199,23 @@ def run_correlate_agent(
             )
             rag_context = "\n\n".join(f"[{d.doc_id}]\n{d.text}" for d in retrieved)
 
+    # Every finding is included (no truncation); identical observations
+    # are grouped with an occurrence count and full endpoint list.
+    groups = compact_findings(all_findings)
+    findings_json = json.dumps(groups, indent=1)
+    evidence.log(
+        "CORRELATE_INPUT_PREPARED",
+        agent="correlate",
+        raw_finding_count=len(all_findings),
+        grouped_finding_count=len(groups),
+        findings_chars=len(findings_json),
+    )
+
     user_content = (
         OUTPUT_SCHEMA_HINT
-        + "\n\nRAW FINDINGS (JSON):\n"
-        + json.dumps([f.to_dict() for f in all_findings], indent=2)[:12000]
+        + "\n\nRAW FINDINGS (JSON, grouped: identical observations merged with an "
+        "'occurrences' count and the full list of endpoints):\n"
+        + findings_json
         + "\n\nLIVE CVE DATA FOR DETECTED SERVICE VERSIONS:\n"
         + ("\n".join(cve_context_lines) if cve_context_lines else "(no service versions available to look up)")
         + "\n\nRETRIEVED REFERENCE MATERIAL:\n"
@@ -205,6 +267,7 @@ def run_correlate_agent(
         output_tokens=usage.completion_tokens if usage else 0,
         duration_s=time.time() - started,
         raw_input_finding_count=len(all_findings),
+        grouped_finding_count=len(groups),
     )
     evidence.log(
         "AGENT_END",
